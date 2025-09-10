@@ -1,10 +1,11 @@
 import { Input } from "@/components/ui/input";
 import { progressOptions, projectOptions } from "@/config/select-options";
 import RHFSelect from "../rhf/rhf-select";
+import { Button } from "../ui/button";
 
 const TaskSchedule = () => {
   return (
-    <div className="grid grid-cols-8 gap-2 ">
+    <div className="grid grid-cols-9 gap-2 ">
       <RHFSelect
         className="col-span-2"
         placeholder="project"
@@ -18,6 +19,12 @@ const TaskSchedule = () => {
         placeholder="progress"
         options={progressOptions}
       />
+      <div className="col-span-1 flex gap-1">
+        <Button variant="outline" size="icon">
+          -
+        </Button>
+        <Button size="icon">+</Button>
+      </div>
     </div>
   );
 };

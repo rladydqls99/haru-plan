@@ -1,3 +1,4 @@
+import { useFormContext } from "react-hook-form";
 import {
   Select,
   SelectContent,
@@ -7,26 +8,63 @@ import {
 } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
 import type { SelectOption } from "@/types/common-type";
+import {
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "../ui/form";
 
-interface propsType {
-  className?: string;
+interface Props {
+  name: string;
   placeholder: string;
+  className?: string;
+  selectClassName?: string;
+  label?: string;
+  description?: string;
   options: SelectOption[];
 }
-const RHFSelect = ({ className, placeholder, options }: propsType) => {
+const RHFSelect = (props: Props) => {
+  const {
+    name,
+    placeholder,
+    className,
+    selectClassName,
+    label,
+    description,
+    options,
+  } = props;
+
+  const { control } = useFormContext();
+
   return (
-    <Select>
-      <SelectTrigger className={cn("w-full", className)}>
-        <SelectValue placeholder={placeholder} />
-      </SelectTrigger>
-      <SelectContent>
-        {options.map((option) => (
-          <SelectItem key={option.value} value={option.value}>
-            {option.label}
-          </SelectItem>
-        ))}
-      </SelectContent>
-    </Select>
+    <FormField
+      name={name}
+      control={control}
+      render={({ field }) => (
+        <FormItem className={cn("w-full", className)}>
+          {label && <FormLabel>{label}</FormLabel>}
+          <FormControl>
+            <Select onValueChange={field.onChange} value={field.value}>
+              <SelectTrigger className={cn("w-full", selectClassName)}>
+                <SelectValue placeholder={placeholder} />
+              </SelectTrigger>
+              <SelectContent>
+                {options.map((option) => (
+                  <SelectItem key={option.value} value={option.value}>
+                    {option.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </FormControl>
+          {description && <FormDescription>{description}</FormDescription>}
+          <FormMessage />
+        </FormItem>
+      )}
+    />
   );
 };
 export default RHFSelect;

@@ -7,7 +7,7 @@ export default function Home() {
     <div className="min-h-screen flex flex-col bg-gray-50">
       <Header />
       <main className="flex-1 flex">
-        <div className="max-w-[1280px] w-full mx-auto py-8">
+        <div className="max-w-[1280px] w-full mx-auto py-8  px-4 sm:px-6 lg:px-8">
           <DailyPlan />
         </div>
       </main>

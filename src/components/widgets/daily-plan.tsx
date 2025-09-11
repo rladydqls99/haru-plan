@@ -7,9 +7,9 @@ import { type DailyPlanSchema, dailyPlanSchema } from "@/models/validation";
 import { Button } from "../ui/button";
 import { Form } from "../ui/form";
 import { Separator } from "../ui/separator";
-import ProjectTaskList from "./project-task-list";
+import DailyProject from "./daily-project";
 
-const DailyList = () => {
+const DailyPlan = () => {
   const methods = useForm<DailyPlanSchema>({
     defaultValues: dafaultDailyPlan(),
     resolver: zodResolver(dailyPlanSchema),
@@ -45,10 +45,10 @@ const DailyList = () => {
         </div>
         <Separator className="mt-4 mb-6" />
         {fields.map((field) => (
-          <ProjectTaskList key={field.id} />
+          <DailyProject key={field.id} />
         ))}
       </form>
     </Form>
   );
 };
-export default DailyList;
+export default DailyPlan;

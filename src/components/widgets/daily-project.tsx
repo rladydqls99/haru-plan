@@ -3,7 +3,7 @@ import RHFInput from "../rhf/rhf-input";
 import RHFSelect from "../rhf/rhf-select";
 import { Button } from "../ui/button";
 
-const ProjectTaskList = () => {
+const DailyProject = () => {
   return (
     <div className="flex gap-2">
       <RHFSelect
@@ -42,4 +42,4 @@ const ProjectTaskList = () => {
     </div>
   );
 };
-export default ProjectTaskList;
+export default DailyProject;

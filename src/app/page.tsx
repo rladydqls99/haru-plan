@@ -1,4 +1,4 @@
-import DailyList from "@/components/widgets/daily-list";
+import DailyPlan from "@/components/widgets/daily-plan";
 import Footer from "@/components/widgets/footer";
 import Header from "@/components/widgets/header";
 
@@ -8,7 +8,7 @@ export default function Home() {
       <Header />
       <main className="flex-1 flex">
         <div className="max-w-[1280px] w-full mx-auto py-8">
-          <DailyList />
+          <DailyPlan />
         </div>
       </main>
       <Footer />

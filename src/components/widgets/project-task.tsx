@@ -1,4 +1,6 @@
+import { useFormContext } from "react-hook-form";
 import { progressOptions } from "@/config/select-options";
+import { cn } from "@/lib/utils";
 import RHFInput from "../rhf/rhf-input";
 import RHFSelect from "../rhf/rhf-select";
 import { Button } from "../ui/button";
@@ -15,6 +17,10 @@ const ProjectTask = ({
   onClickAdd,
   onClickDelete,
 }: Props) => {
+  const { getValues } = useFormContext();
+  const taskCount =
+    getValues(`projectList.${projectIndex}.taskList`).length - 1;
+
   return (
     <div className="flex flex-row gap-2">
       <RHFInput
@@ -42,7 +48,11 @@ const ProjectTask = ({
         <Button variant="outline" size="icon" onClick={onClickDelete}>
           -
         </Button>
-        <Button size="icon" onClick={onClickAdd}>
+        <Button
+          className={cn(taskCount === taskIndex ? "visible" : "invisible")}
+          size="icon"
+          onClick={onClickAdd}
+        >
           +
         </Button>
       </div>

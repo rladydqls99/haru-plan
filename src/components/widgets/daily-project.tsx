@@ -6,8 +6,9 @@ import ProjectTask from "./project-task";
 
 interface Props {
   projectIndex: number;
+  onClickDelete: () => void;
 }
-const DailyProject = ({ projectIndex }: Props) => {
+const DailyProject = ({ projectIndex, onClickDelete }: Props) => {
   const { control } = useFormContext();
 
   const { fields, append, remove } = useFieldArray({
@@ -20,6 +21,11 @@ const DailyProject = ({ projectIndex }: Props) => {
   };
 
   const handleTaskDelete = (taskIndex: number) => {
+    if (taskIndex === 0) {
+      onClickDelete();
+      return;
+    }
+
     remove(taskIndex);
   };
   return (

@@ -17,7 +17,7 @@ const DailyPlan = () => {
 
   const handleSubmit = methods.handleSubmit((data) => console.log(data));
 
-  const { fields, append } = useFieldArray({
+  const { fields, append, remove } = useFieldArray({
     control: methods.control,
     name: "projectList",
   });
@@ -25,6 +25,10 @@ const DailyPlan = () => {
   const handleProjectAdd = () => {
     append(defaultDailyProject());
     console.log(fields);
+  };
+
+  const handleProjectDelete = (projectIndex: number) => {
+    remove(projectIndex);
   };
 
   return (
@@ -45,7 +49,11 @@ const DailyPlan = () => {
         </div>
         <Separator className="mt-4 mb-6" />
         {fields.map((field, index) => (
-          <DailyProject key={field.id} projectIndex={index} />
+          <DailyProject
+            key={field.id}
+            projectIndex={index}
+            onClickDelete={() => handleProjectDelete(index)}
+          />
         ))}
       </form>
     </Form>

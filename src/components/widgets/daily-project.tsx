@@ -1,43 +1,45 @@
-import { progressOptions, projectOptions } from "@/config/select-options";
-import RHFInput from "../rhf/rhf-input";
+import { useFieldArray, useFormContext } from "react-hook-form";
+import { projectOptions } from "@/config/select-options";
+import { defaultTask } from "@/models/default-values";
 import RHFSelect from "../rhf/rhf-select";
-import { Button } from "../ui/button";
+import ProjectTask from "./project-task";
 
-const DailyProject = () => {
+interface Props {
+  projectIndex: number;
+}
+const DailyProject = ({ projectIndex }: Props) => {
+  const { control } = useFormContext();
+
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: `projectList.${projectIndex}.taskList`,
+  });
+
+  const handleTaskAdd = () => {
+    append(defaultTask());
+  };
+
+  const handleTaskDelete = (taskIndex: number) => {
+    remove(taskIndex);
+  };
   return (
-    <div className="flex gap-2">
+    <div className="grid grid-cols-8 gap-2">
       <RHFSelect
-        name="project"
+        name={`projectList.${projectIndex}.projectName`}
         placeholder="project"
-        className="flex-2"
+        className="col-span-2"
         options={projectOptions}
       />
-      <RHFInput
-        name="taskName"
-        placeholder="enter the task name.."
-        className="flex-3"
-      />
-      <RHFInput
-        name="plannedTime"
-        placeholder="planned time.."
-        className="flex-1"
-      />
-      <RHFInput
-        name="actionTime"
-        placeholder="action time.."
-        className="flex-1"
-      />
-      <RHFSelect
-        name="progress"
-        className="flex-1"
-        placeholder="progress"
-        options={progressOptions}
-      />
-      <div className="col-span-1 flex gap-1">
-        <Button variant="outline" size="icon">
-          -
-        </Button>
-        <Button size="icon">+</Button>
+      <div className="flex flex-col space-y-2 col-span-6">
+        {fields.map((fields, taskIndex) => (
+          <ProjectTask
+            key={fields.id}
+            projectIndex={projectIndex}
+            taskIndex={taskIndex}
+            onClickAdd={handleTaskAdd}
+            onClickDelete={() => handleTaskDelete(taskIndex)}
+          />
+        ))}
       </div>
     </div>
   );

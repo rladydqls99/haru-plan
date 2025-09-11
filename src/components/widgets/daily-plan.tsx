@@ -44,8 +44,8 @@ const DailyPlan = () => {
           </div>
         </div>
         <Separator className="mt-4 mb-6" />
-        {fields.map((field) => (
-          <DailyProject key={field.id} />
+        {fields.map((field, index) => (
+          <DailyProject key={field.id} projectIndex={index} />
         ))}
       </form>
     </Form>

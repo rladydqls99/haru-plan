@@ -6,14 +6,14 @@ export interface Task {
   progress: number;
 }
 
-export interface projectTaskList {
+export interface DailyProject {
   projectName: string;
   projectId: string;
   taskList: Task[];
 }
 
-export interface DailyList {
+export interface DailyPlan {
   date: string;
   userId: string;
-  projectList: projectTaskList;
+  projectList: DailyProject;
 }

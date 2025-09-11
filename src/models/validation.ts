@@ -3,7 +3,7 @@ import z from "zod";
 // daily 관련 --------------------------------------------------
 
 // 스키마
-const taskSchema = z.object({
+export const taskSchema = z.object({
   projectId: z.string(),
   taskName: z.string(),
   plannedTime: z.string(),
@@ -11,19 +11,21 @@ const taskSchema = z.object({
   progress: z.number().min(0).max(100),
 });
 
-const projectTaskListSchema = z.object({
+export const dailyProjectSchema = z.object({
   projectName: z.string(),
   projectId: z.string(),
   taskList: z.array(taskSchema),
 });
 
-export const dailyListSchema = z.object({
+export const dailyPlanSchema = z.object({
   date: z.string(),
   userId: z.string(),
-  projectList: z.array(projectTaskListSchema),
+  projectList: z.array(dailyProjectSchema),
 });
 
 // 타입
-export type DailyListSchema = z.infer<typeof dailyListSchema>;
+export type TaskSchema = z.infer<typeof taskSchema>;
+export type DailyProjectSchema = z.infer<typeof dailyProjectSchema>;
+export type DailyPlanSchema = z.infer<typeof dailyPlanSchema>;
 
 // --------------------------------------------------------------------

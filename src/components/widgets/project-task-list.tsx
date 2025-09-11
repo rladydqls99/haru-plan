@@ -18,8 +18,8 @@ const ProjectTaskList = () => {
         className="flex-3"
       />
       <RHFInput
-        name="planningTime"
-        placeholder="planning time.."
+        name="plannedTime"
+        placeholder="planned time.."
         className="flex-1"
       />
       <RHFInput

@@ -37,11 +37,11 @@ const DailyProject = ({ projectIndex, onClickDelete }: Props) => {
         options={projectOptions}
       />
       <div className="flex flex-col space-y-2 col-span-6">
-        {fields.map((fields, taskIndex) => (
+        {fields.map((field, taskIndex) => (
           <ProjectTask
-            key={fields.id}
-            projectIndex={projectIndex}
-            taskIndex={taskIndex}
+            key={field.id}
+            isFirst={field.id === fields[0].id}
+            taskFieldName={`projectList.${projectIndex}.taskList.${taskIndex}`}
             onClickAdd={handleTaskAdd}
             onClickDelete={() => handleTaskDelete(taskIndex)}
           />
